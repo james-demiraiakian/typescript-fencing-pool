@@ -1,23 +1,19 @@
 -- Use this file to define your SQL tables.
 -- The SQL in this file will be executed when you run `npm run setup-db`.
 
-drop table if exists foos;
+DROP TABLE IF EXISTS users;
 
-create table foos (
-  id bigint generated always as identity primary key,
-  foo varchar
+
+CREATE TABLE users (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  password_hash TEXT NOT NULL,
+  club_id INT,
+  owner BOOLEAN
 );
 
-insert into
-  foos (foo)
-values
-  (
-    'bar'
-  ),
-  (
-    'baz'
-  ),
-  (
-    'qux'
-  )
-  ;
+INSERT INTO 
+  users (name, email, password_hash, club_id, owner)
+VALUES
+  ('Fred Flonstine', 'f.f@stone.com', 'y49f3q2y592843y894d1yn8r9ytc29', '0206', true)
