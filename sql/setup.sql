@@ -13,7 +13,3 @@ CREATE TABLE users (
   owner BOOLEAN
 );
 
-INSERT INTO 
-  users (name, email, password_hash, club_id, owner)
-VALUES
-  ('Fred Flonstine', 'f.f@stone.com', 'y49f3q2y592843y894d1yn8r9ytc29', '0206', true)
