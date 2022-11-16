@@ -27,6 +27,11 @@ describe('server', () => {
     passwordHash: 'y4bb4d4bb4d00',
   };
 
+  const userCredentials = {
+    email: 'f.f@stone.com',
+    password: 'y4bb4d4bb4d00',
+  };
+
   it('Inserts a user into the database', async () => {
     const res = await request(app).post('/users').send(user);
 
@@ -36,10 +41,6 @@ describe('server', () => {
   it('Logs a user in', async () => {
     await request(app).post('/users').send(user);
 
-    const userCredentials = {
-      email: 'f.f@stone.com',
-      password: 'y4bb4d4bb4d00',
-    };
     const expected = {
       message: 'Signed In',
       user: expect.any(String),
@@ -50,8 +51,6 @@ describe('server', () => {
     const actual = res.body;
 
     expect(actual).toEqual(expected);
-
-    // User.testDelete(userCredentials.email);
   });
 
   it('Logs a user out', async () => {
@@ -66,5 +65,7 @@ describe('server', () => {
       success: true,
       message: 'Signed Out',
     });
+
+    User.testDelete(userCredentials.email);
   });
 });

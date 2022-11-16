@@ -1,5 +1,5 @@
 import pool from '../database.js';
-import { userInterface } from '../types/interface.js';
+import { userInterface } from '../../common/interface.js';
 
 export default class User {
   id: number;
