@@ -53,6 +53,13 @@ export default class User {
     return new User(rows[0]);
   }
 
+  static async testDelete(email: string) {
+    const { rows } = await pool.query(
+      `DELETE FROM users WHERE email=$1`,
+      [email]
+    );
+  }
+
   get passwordHash() {
     return this.#passwordHash;
   }
