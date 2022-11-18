@@ -1,5 +1,5 @@
 import pool from '../database.js';
-import { userInterface } from '../types/interface.js';
+import { userInterface } from '../../common/interface.js';
 
 export default class User {
   id: number;
@@ -51,6 +51,13 @@ export default class User {
     // if (!rows[0]) return null;
 
     return new User(rows[0]);
+  }
+
+  static async testDelete(email: string) {
+    const { rows } = await pool.query(
+      `DELETE FROM users WHERE email=$1`,
+      [email]
+    );
   }
 
   get passwordHash() {

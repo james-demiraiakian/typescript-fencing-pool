@@ -1,4 +1,4 @@
-// Exand and ExpandRecursively allow us ot peek into the innards of a type that
+// Expand and ExpandRecursively allow us ot peek into the innards of a type that
 // sometimes the auto-complete/intellisense doesn't give us. See
 // https://stackoverflow.com/a/69288824 for the creative solutions on getting
 // this info.
@@ -20,7 +20,9 @@ export type Expand<T> = T extends (...args: infer A) => infer R
   ? { [K in keyof O]: O[K] }
   : never;
 
-export type ExpandRecursively<T> = T extends (...args: infer A) => infer R
+export type ExpandRecursively<T> = T extends (
+  ...args: infer A
+) => infer R
   ? (...args: ExpandRecursively<A>) => ExpandRecursively<R>
   : T extends object
   ? T extends infer O

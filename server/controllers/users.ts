@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import User from '../models/User.js';
 import { UserService } from '../services/UserService.js';
 
 const ONE_DAY_IN_MS: number = 1000 * 60 * 60 * 24;
+const cookieName = process.env.COOKIE_NAME;
 
 const userController = Router()
   .post('/', async (req, res, next) => {
@@ -21,9 +21,8 @@ const userController = Router()
         password,
       });
 
-      const cookieName = process.env.COOKIE_NAME;
       if (cookieName === undefined) {
-        return Error('Cookie must be named');
+        return new Error('Cookie must be named');
       }
       res
         .cookie(cookieName, sessionToken, {
@@ -34,6 +33,17 @@ const userController = Router()
     } catch (error) {
       next(error);
     }
+  })
+  .delete('/sessions', async (req, res) => {
+    if (cookieName === undefined) {
+      return new Error('Cookie must be named');
+    }
+    res
+      .clearCookie(cookieName)
+      .json({ success: true, message: 'Signed Out' });
+  })
+  .get('/me', (req, res) => {
+    res.send(req.body);
   });
 
 export default userController;
