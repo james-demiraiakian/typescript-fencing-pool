@@ -41,6 +41,9 @@ const userController = Router()
     res
       .clearCookie(cookieName)
       .json({ success: true, message: 'Signed Out' });
+  })
+  .get('/me', (req, res) => {
+    res.send(req.body);
   });
 
 export default userController;

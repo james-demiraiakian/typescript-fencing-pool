@@ -11,3 +11,10 @@ export interface signInInterface {
   email: string;
   password: string;
 }
+
+export interface registerInterface {
+  email: string;
+  password: string;
+  name: string;
+  owner: boolean;
+}
