@@ -1,7 +1,9 @@
 import express, { type Request, type Response } from 'express';
+import userController from './controllers/users.js';
 import fooController from './foos.js';
 
 const app = express();
+app.use(express.json());
 
 const server = app.listen(
   parseInt(process.env.APP_PORT || '7890'),
